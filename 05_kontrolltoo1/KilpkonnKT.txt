@@ -1,0 +1,146 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+[System.Serializable]
+public class RealPosition
+{
+    public int x1 = 5;
+    public int y1 = 5;
+
+    public int x2 = 5;
+    public int y2 = 5;
+
+}
+
+public class Kilpkonn : MonoBehaviour
+{
+    //Turtle 1
+    public GameObject Turtle1;
+    public int Turtle1X;
+    public int Turtle1Y;
+    public int Turtle1Rotation;
+    public Text Turtle1Pos;
+
+    //Turtle 2
+    public GameObject Turtle2;
+    public int Turtle2X;
+    public int Turtle2Y;
+    public int Turtle2Rotation;
+    public Text Turtle2Pos;
+
+    public RealPosition realPosition;
+    public GameObject Warning;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            //print("LeftArrowClicked!");
+            Turtle1X -= 60;
+            realPosition.x1 -= 60;
+            Turtle1Rotation = 90;
+            calPos1();
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            //print("RightArrowClicked!");
+            Turtle1X += 60;
+            realPosition.x1 += 60;
+            Turtle1Rotation = 270;
+            calPos1();
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            //print("UPArrowClicked!");
+            Turtle1Y += 60;
+            realPosition.y1 += 60;
+            Turtle1Rotation = 0;
+            calPos1();
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            //print("DownArrowClicked!");
+            Turtle1Y -= 60;
+            realPosition.y1 -= 60;
+            Turtle1Rotation = 180;
+            calPos1();
+        }
+        //Turtle 2
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            //print("ButtonDClicked!");
+            Turtle2X += 60;
+            realPosition.x2 += 60;
+            Turtle2Rotation = 270;
+            calPos2();
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            //print("ButtonAClicked!");
+            Turtle2X -= 60;
+            realPosition.x2 -= 60;
+            Turtle2Rotation = 90;
+            calPos2();
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            //print("ButtonWClicked!");
+            Turtle2Y += 60;
+            realPosition.y2 += 60;
+            Turtle2Rotation = 0;
+            calPos2();
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            //print("ButtonSClicked!");
+            Turtle2Y -= 60;
+            realPosition.y2 -= 60;
+            Turtle2Rotation = 180;
+            calPos2();
+        }
+    }
+    void calPos1()
+    {
+        Vector3 newPos = new Vector3(Turtle1X, Turtle1Y, 0);
+        Turtle1.transform.position = newPos;
+        Turtle1.transform.rotation = Quaternion.Euler(0, 0, Turtle1Rotation);
+
+        Turtle1Pos.text = "Rohelise kilpkonna x on: " + realPosition.x1.ToString() + " ja ta y on: " + realPosition.y1.ToString();
+        print("Rohelise kilpkonna x on: " + realPosition.x1.ToString() + " ja ta y on: " + realPosition.y1.ToString());
+
+        float distance = Vector2.Distance(new Vector2(realPosition.x1, realPosition.y1), new Vector2(realPosition.x2, realPosition.y2));
+        if (distance <= 120)
+        {
+            print("Kokkupõrke hoiatus!!!");
+            Warning.SetActive(true);
+        }
+        else
+        {
+            Warning.SetActive(false);
+        }
+    }
+    void calPos2()
+    {
+        Vector3 newPos = new Vector3(Turtle2X, Turtle2Y, 0);
+        Turtle2.transform.position = newPos;
+        Turtle2.transform.rotation = Quaternion.Euler(0, 0, Turtle2Rotation);
+
+        Turtle2Pos.text = "Punase kilpkonna x on: " + realPosition.x2.ToString() + " ja ta y on: " + realPosition.y2.ToString();
+        print("Punase kilpkonna x on: " + realPosition.x2.ToString() + " ja ta y on: " + realPosition.y2.ToString());
+
+        float distance = Vector2.Distance(new Vector2(realPosition.x1, realPosition.y1), new Vector2(realPosition.x2, realPosition.y2));
+        if (distance <= 120)
+        {
+            print("Kokkupõrke hoiatus!!!");
+            Warning.SetActive(true);
+        }
+        else
+        {
+            Warning.SetActive(false);
+        }
+    }
+}
+
