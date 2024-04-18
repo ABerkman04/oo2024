@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pudeli täitmine</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<h1>Pudeli täitmine</h1>
+<label for="pudeliMaht">Sisesta pudeli maht (liitrites):</label>
+<input type="number" id="pudeliMaht">
+<br>
+<label for="vedelikuKogus">Sisesta vedeliku kogus (liitrites):</label>
+<input type="number" id="vedelikuKogus">
+<br>
+<button onclick="visualiseeri()">Visualiseeri</button>
+<div id="pudel" class="pudel">
+  <div id="vedelik" class="vedelik"></div>
+</div>
+<p id="pudeliKorgus">Pudeli kõrgus: 0%</p>
+<script src="script.js"></script>
+</body>
+</html>
